@@ -1,0 +1,2 @@
+# CustomDotPageControlSample
+UIPageControlのドットの色やサイズを変えるサンプル
