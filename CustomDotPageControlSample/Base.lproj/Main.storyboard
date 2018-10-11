@@ -24,11 +24,29 @@
                                     <constraint firstAttribute="width" constant="100" id="vwi-0d-q6H"/>
                                 </constraints>
                             </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xv-he-1zI">
+                                <rect key="frame" x="16" y="318.5" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="tapLeft:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jvI-2X-6Xy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0JA-7y-88X">
+                                <rect key="frame" x="313" y="318.5" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="tapRight:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qrb-Xl-Ztd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="7Xv-he-1zI" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="HN0-XH-GJo"/>
+                            <constraint firstItem="7Xv-he-1zI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="kXE-Gh-me5"/>
                             <constraint firstItem="fO7-8i-EcM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mlj-TN-KQp"/>
+                            <constraint firstItem="0JA-7y-88X" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="pjK-en-5hO"/>
                             <constraint firstItem="fO7-8i-EcM" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="rsA-uA-yIS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0JA-7y-88X" secondAttribute="trailing" constant="16" id="uWb-8s-VLz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

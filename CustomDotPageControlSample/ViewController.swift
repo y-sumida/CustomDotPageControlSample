@@ -19,6 +19,16 @@ class ViewController: UIViewController {
         pageControl.currentPageIndicatorTintColor = .red
     }
 
+    @IBAction func tapLeft(_ sender: Any) {
+        if pageControl.currentPage > 0 {
+            pageControl.currentPage -= 1
+        }
+    }
 
+    @IBAction func tapRight(_ sender: Any) {
+        if pageControl.currentPage < pageControl.numberOfPages {
+            pageControl.currentPage += 1
+        }
+    }
 }
 
