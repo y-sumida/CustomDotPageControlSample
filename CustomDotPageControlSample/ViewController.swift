@@ -19,16 +19,30 @@ class ViewController: UIViewController {
         pageControl.currentPageIndicatorTintColor = .red
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        refresh()
+    }
+
     @IBAction func tapLeft(_ sender: Any) {
         if pageControl.currentPage > 0 {
             pageControl.currentPage -= 1
+            refresh()
         }
     }
 
     @IBAction func tapRight(_ sender: Any) {
         if pageControl.currentPage < pageControl.numberOfPages {
             pageControl.currentPage += 1
+            refresh()
         }
+    }
+
+    private func refresh() {
+        pageControl.subviews.forEach {
+            $0.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+        pageControl.subviews[pageControl.currentPage].transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
     }
 }
 
