@@ -2,11 +2,11 @@ import UIKit
 
 // https://stackoverflow.com/questions/50985359/subclassing-the-uipagecontrol-for-customizing-the-active-and-inactive-dot-image
 class CustomPageControl: UIPageControl {
-    var imgActive: UIImage = dotImage(color: UIColor.green, size: CGSize(width: 14, height: 14))
-    var imgInactive: UIImage = dotImage(color: UIColor.gray, size: CGSize(width: 10, height: 10))
+    private var imgActive: UIImage = dotImage(color: UIColor.green, size: CGSize(width: 14, height: 14))
+    private var imgInactive: UIImage = dotImage(color: UIColor.gray, size: CGSize(width: 10, height: 10))
 
-    let customActiveYOffset: CGFloat = 2.0
-    let customInactiveYOffset: CGFloat = 0.0
+    private let customActiveYOffset: CGFloat = 2.0
+    private let customInactiveYOffset: CGFloat = 0.0
 
     override var numberOfPages: Int {
         didSet {
@@ -42,7 +42,7 @@ class CustomPageControl: UIPageControl {
         updateDots()
     }
 
-    func updateDots() {
+    private func updateDots() {
         var i = 0
         let activeSize = imgActive.size
         let inactiveSize = imgInactive.size
@@ -83,7 +83,7 @@ class CustomPageControl: UIPageControl {
         }
     }
 
-    func imageForSubview(_ view:UIView) -> UIImageView? {
+    private func imageForSubview(_ view:UIView) -> UIImageView? {
         var dot: UIImageView?
         if let dotImageView = view as? UIImageView {
             dot = dotImageView
@@ -98,7 +98,7 @@ class CustomPageControl: UIPageControl {
         return dot
     }
 
-    static func dotImage(color: UIColor, size: CGSize) -> UIImage {
+    private static func dotImage(color: UIColor, size: CGSize) -> UIImage {
         UIGraphicsBeginImageContext(size)
 
         let rect = CGRect(origin: CGPoint.zero, size: size)
