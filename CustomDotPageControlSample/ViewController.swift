@@ -15,8 +15,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         pageControl.numberOfPages = 4
-        //pageControl.pageIndicatorTintColor = .gray
-        //pageControl.currentPageIndicatorTintColor = .red
+        pageControl.pageIndicatorTintColor = .gray
+        pageControl.currentPageIndicatorTintColor = .red
     }
 
     override func viewDidAppear(_ animated: Bool) {

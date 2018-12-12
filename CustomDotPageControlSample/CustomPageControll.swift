@@ -2,8 +2,8 @@ import UIKit
 
 // https://stackoverflow.com/questions/50985359/subclassing-the-uipagecontrol-for-customizing-the-active-and-inactive-dot-image
 class CustomPageControl: UIPageControl {
-    let imgActive: UIImage = dotImage(color: UIColor.green, size: CGSize(width: 14, height: 14))
-    let imgInactive: UIImage = dotImage(color: UIColor.gray, size: CGSize(width: 10, height: 10))
+    var imgActive: UIImage = dotImage(color: UIColor.green, size: CGSize(width: 14, height: 14))
+    var imgInactive: UIImage = dotImage(color: UIColor.gray, size: CGSize(width: 10, height: 10))
 
     let customActiveYOffset: CGFloat = 2.0
     let customInactiveYOffset: CGFloat = 0.0
@@ -20,10 +20,24 @@ class CustomPageControl: UIPageControl {
         }
     }
 
+    override var currentPageIndicatorTintColor: UIColor? {
+        didSet {
+            if let color = currentPageIndicatorTintColor {
+                imgActive = CustomPageControl.dotImage(color: color, size: CGSize(width: 14, height: 14))
+            }
+        }
+    }
+
+    override var pageIndicatorTintColor: UIColor? {
+        didSet {
+            if let color = pageIndicatorTintColor {
+                imgInactive = CustomPageControl.dotImage(color: color, size: CGSize(width: 10, height: 10))
+            }
+        }
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        pageIndicatorTintColor = .clear
-        currentPageIndicatorTintColor = .clear
         clipsToBounds = false
         updateDots()
     }
@@ -61,6 +75,7 @@ class CustomPageControl: UIPageControl {
                     addedImageView.frame.origin.x = addedImageView.frame.origin.x - 2
                 } else {
                     addedImageView.frame.origin.y = addedImageView.frame.origin.y - customInactiveYOffset
+                    addedImageView.tintColor = pageIndicatorTintColor
                 }
                 view.addSubview(addedImageView)
                 i = i + 1
