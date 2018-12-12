@@ -22,40 +22,40 @@ class CustomPageControl: UIPageControl {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.pageIndicatorTintColor = .clear
-        self.currentPageIndicatorTintColor = .clear
-        self.clipsToBounds = false
+        pageIndicatorTintColor = .clear
+        currentPageIndicatorTintColor = .clear
+        clipsToBounds = false
         updateDots()
     }
 
     func updateDots() {
         var i = 0
-        let activeSize = self.imgActive.size
-        let inactiveSize = self.imgInactive.size
+        let activeSize = imgActive.size
+        let inactiveSize = imgInactive.size
         let activeRect = CGRect(x: 0, y: 0, width: activeSize.width, height: activeSize.height)
         let inactiveRect = CGRect(x: 0, y: 0, width: inactiveSize.width, height: inactiveSize.height)
 
-        for view in self.subviews {
-            if let imageView = self.imageForSubview(view) {
-                if i == self.currentPage {
-                    imageView.image = self.imgActive
+        for view in subviews {
+            if let imageView = imageForSubview(view) {
+                if i == currentPage {
+                    imageView.image = imgActive
                     imageView.frame = activeRect
                     imageView.frame.origin.y = imageView.frame.origin.y - customActiveYOffset
                     imageView.frame.origin.x = imageView.frame.origin.x - 2
                 } else {
-                    imageView.image = self.imgInactive
+                    imageView.image = imgInactive
                     imageView.frame = inactiveRect
                     imageView.frame.origin.y = imageView.frame.origin.y - customInactiveYOffset
                 }
                 i = i + 1
             } else {
-                var dotImage = self.imgInactive
-                if i == self.currentPage {
-                    dotImage = self.imgActive
+                var dotImage = imgInactive
+                if i == currentPage {
+                    dotImage = imgActive
                 }
                 view.clipsToBounds = false
                 let addedImageView: UIImageView = UIImageView(image: dotImage)
-                if dotImage == self.imgActive {
+                if dotImage == imgActive {
                     addedImageView.frame = activeRect
                     addedImageView.frame.origin.y = addedImageView.frame.origin.y - customActiveYOffset
                     addedImageView.frame.origin.x = addedImageView.frame.origin.x - 2
