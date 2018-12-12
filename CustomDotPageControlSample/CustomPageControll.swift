@@ -7,8 +7,6 @@ class CustomPageControl: UIPageControl {
 
     let customActiveYOffset: CGFloat = 2.0
     let customInactiveYOffset: CGFloat = 0.0
-    var hasCustomTintColor: Bool = false
-    let customActiveDotColor: UIColor = UIColor(white: 0xe62f3e, alpha: 1.0)
 
     override var numberOfPages: Int {
         didSet {
@@ -41,9 +39,6 @@ class CustomPageControl: UIPageControl {
             if let imageView = self.imageForSubview(view) {
                 if i == self.currentPage {
                     imageView.image = self.imgActive
-                    if self.hasCustomTintColor {
-                        imageView.tintColor = customActiveDotColor
-                    }
                     imageView.frame = activeRect
                     imageView.frame.origin.y = imageView.frame.origin.y - customActiveYOffset
                     imageView.frame.origin.x = imageView.frame.origin.x - 2
@@ -64,9 +59,6 @@ class CustomPageControl: UIPageControl {
                     addedImageView.frame = activeRect
                     addedImageView.frame.origin.y = addedImageView.frame.origin.y - customActiveYOffset
                     addedImageView.frame.origin.x = addedImageView.frame.origin.x - 2
-                    if self.hasCustomTintColor {
-                        addedImageView.tintColor = customActiveDotColor
-                    }
                 } else {
                     addedImageView.frame.origin.y = addedImageView.frame.origin.y - customInactiveYOffset
                 }
