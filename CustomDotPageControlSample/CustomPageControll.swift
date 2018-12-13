@@ -77,7 +77,6 @@ class CustomPageControl: UIPageControl {
                 } else {
                     addedImageView.frame.origin.y = addedImageView.frame.origin.y - inactiveOffset
                     addedImageView.frame.origin.x = addedImageView.frame.origin.x - inactiveOffset
-                    addedImageView.tintColor = pageIndicatorTintColor
                 }
                 view.addSubview(addedImageView)
                 i = i + 1
