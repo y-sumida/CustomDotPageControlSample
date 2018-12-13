@@ -5,8 +5,8 @@ class CustomPageControl: UIPageControl {
     private var imgActive: UIImage = UIImage.dotImage(color: UIColor.green, size: CGSize(width: 14, height: 14))
     private var imgInactive: UIImage = UIImage.dotImage(color: UIColor.gray, size: CGSize(width: 10, height: 10))
 
-    private let customActiveOffset: CGFloat = 3.5
-    private let customInactiveOffset: CGFloat = 1.5
+    private let activeOffset: CGFloat = 3.5
+    private let inactiveOffset: CGFloat = 1.5
 
     override var numberOfPages: Int {
         didSet {
@@ -54,13 +54,13 @@ class CustomPageControl: UIPageControl {
                 if i == currentPage {
                     imageView.image = imgActive
                     imageView.frame = activeRect
-                    imageView.frame.origin.y = imageView.frame.origin.y - customActiveOffset
-                    imageView.frame.origin.x = imageView.frame.origin.x - customActiveOffset
+                    imageView.frame.origin.y = imageView.frame.origin.y - activeOffset
+                    imageView.frame.origin.x = imageView.frame.origin.x - activeOffset
                 } else {
                     imageView.image = imgInactive
                     imageView.frame = inactiveRect
-                    imageView.frame.origin.y = imageView.frame.origin.y - customInactiveOffset
-                    imageView.frame.origin.x = imageView.frame.origin.x - customInactiveOffset
+                    imageView.frame.origin.y = imageView.frame.origin.y - inactiveOffset
+                    imageView.frame.origin.x = imageView.frame.origin.x - inactiveOffset
                 }
                 i = i + 1
             } else {
@@ -72,11 +72,11 @@ class CustomPageControl: UIPageControl {
                 let addedImageView: UIImageView = UIImageView(image: dotImage)
                 if dotImage == imgActive {
                     addedImageView.frame = activeRect
-                    addedImageView.frame.origin.y = addedImageView.frame.origin.y - customActiveOffset
-                    addedImageView.frame.origin.x = addedImageView.frame.origin.x - customActiveOffset
+                    addedImageView.frame.origin.y = addedImageView.frame.origin.y - activeOffset
+                    addedImageView.frame.origin.x = addedImageView.frame.origin.x - activeOffset
                 } else {
-                    addedImageView.frame.origin.y = addedImageView.frame.origin.y - customInactiveOffset
-                    addedImageView.frame.origin.x = addedImageView.frame.origin.x - customInactiveOffset
+                    addedImageView.frame.origin.y = addedImageView.frame.origin.y - inactiveOffset
+                    addedImageView.frame.origin.x = addedImageView.frame.origin.x - inactiveOffset
                     addedImageView.tintColor = pageIndicatorTintColor
                 }
                 view.addSubview(addedImageView)
