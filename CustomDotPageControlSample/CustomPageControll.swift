@@ -2,8 +2,8 @@ import UIKit
 
 // https://stackoverflow.com/questions/50985359/subclassing-the-uipagecontrol-for-customizing-the-active-and-inactive-dot-image
 class CustomPageControl: UIPageControl {
-    private var imgActive: UIImage = dotImage(color: UIColor.green, size: CGSize(width: 14, height: 14))
-    private var imgInactive: UIImage = dotImage(color: UIColor.gray, size: CGSize(width: 10, height: 10))
+    private var imgActive: UIImage = UIImage.dotImage(color: UIColor.green, size: CGSize(width: 14, height: 14))
+    private var imgInactive: UIImage = UIImage.dotImage(color: UIColor.gray, size: CGSize(width: 10, height: 10))
 
     private let customActiveOffset: CGFloat = 3.5
     private let customInactiveOffset: CGFloat = 1.5
@@ -23,7 +23,7 @@ class CustomPageControl: UIPageControl {
     override var currentPageIndicatorTintColor: UIColor? {
         didSet {
             if let color = currentPageIndicatorTintColor {
-                imgActive = CustomPageControl.dotImage(color: color, size: CGSize(width: 14, height: 14))
+                imgActive = UIImage.dotImage(color: color, size: CGSize(width: 14, height: 14))
             }
         }
     }
@@ -31,7 +31,7 @@ class CustomPageControl: UIPageControl {
     override var pageIndicatorTintColor: UIColor? {
         didSet {
             if let color = pageIndicatorTintColor {
-                imgInactive = CustomPageControl.dotImage(color: color, size: CGSize(width: 10, height: 10))
+                imgInactive = UIImage.dotImage(color: color, size: CGSize(width: 10, height: 10))
             }
         }
     }
@@ -98,19 +98,5 @@ class CustomPageControl: UIPageControl {
             }
         }
         return dot
-    }
-
-    private static func dotImage(color: UIColor, size: CGSize) -> UIImage {
-        UIGraphicsBeginImageContext(size)
-
-        let rect = CGRect(origin: CGPoint.zero, size: size)
-        let context = UIGraphicsGetCurrentContext()
-        context?.setFillColor(color.cgColor)
-        context?.fillEllipse(in: rect)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-
-        UIGraphicsEndImageContext()
-
-        return image!
     }
 }
