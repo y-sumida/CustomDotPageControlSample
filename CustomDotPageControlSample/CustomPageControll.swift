@@ -40,6 +40,8 @@ class CustomPageControl: UIPageControl {
         super.awakeFromNib()
         clipsToBounds = false
         updateDots()
+
+        addTarget(self, action: #selector(didChangeValue(sender:)), for: .valueChanged)
     }
 
     private func updateDots() {
@@ -97,5 +99,9 @@ class CustomPageControl: UIPageControl {
             }
         }
         return dot
+    }
+
+    @objc func didChangeValue(sender: UIPageControl){
+        currentPage = sender.currentPage
     }
 }
