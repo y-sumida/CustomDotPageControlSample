@@ -64,7 +64,7 @@ class CustomPageControl: UIPageControl {
                     imageView.frame.origin.y = imageView.frame.origin.y - inactiveOffset
                     imageView.frame.origin.x = imageView.frame.origin.x - inactiveOffset
                 }
-                i = i + 1
+                i += 1
             } else {
                 var dotImage = imgInactive
                 if i == currentPage {
@@ -81,7 +81,7 @@ class CustomPageControl: UIPageControl {
                     addedImageView.frame.origin.x = addedImageView.frame.origin.x - inactiveOffset
                 }
                 view.addSubview(addedImageView)
-                i = i + 1
+                i += 1
             }
         }
     }
