@@ -101,7 +101,7 @@ class CustomPageControl: UIPageControl {
         return dot
     }
 
-    @objc func didChangeValue(sender: UIPageControl){
+    @objc private func didChangeValue(sender: UIPageControl){
         currentPage = sender.currentPage
     }
 }
