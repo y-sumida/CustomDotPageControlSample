@@ -2,22 +2,24 @@ import UIKit
 
 // https://stackoverflow.com/questions/50985359/subclassing-the-uipagecontrol-for-customizing-the-active-and-inactive-dot-image
 class CustomPageControl: UIPageControl {
+    private static let defaultDotSize: CGFloat = 7.0 // UIPageControllerのドットのサイズ
+
     private lazy var currentPageIndicator: UIImage = UIImage.dotImage(color: UIColor.green, size: CGSize(width: currentPageIndicatorSize, height: currentPageIndicatorSize))
     private lazy var pageIndicator: UIImage = UIImage.dotImage(color: UIColor.gray, size: CGSize(width: pageIndicatorSize, height: pageIndicatorSize))
 
-    private var currentPageIndicatorOffset: CGFloat = 1.5
-    private var pageIndicatorOffset: CGFloat = 0
+    private lazy var currentPageIndicatorOffset: CGFloat = calcIndicatorOffset(size: CustomPageControl.defaultDotSize)
+    private lazy var pageIndicatorOffset: CGFloat = calcIndicatorOffset(size: CustomPageControl.defaultDotSize)
 
-    var currentPageIndicatorSize: CGFloat = 10 {
+    var currentPageIndicatorSize: CGFloat = defaultDotSize {
         didSet {
-            currentPageIndicatorOffset = abs(currentPageIndicatorSize - 7) / 2
+            currentPageIndicatorOffset = calcIndicatorOffset(size: currentPageIndicatorSize)
             currentPageIndicator = UIImage.dotImage(color: currentPageIndicatorTintColor ?? .gray, size: CGSize(width: currentPageIndicatorSize, height: currentPageIndicatorSize))
             updateDots()
         }
     }
-    var pageIndicatorSize: CGFloat = 7 {
+    var pageIndicatorSize: CGFloat = defaultDotSize {
         didSet {
-            pageIndicatorOffset = abs(pageIndicatorSize - 7) / 2
+            pageIndicatorOffset = calcIndicatorOffset(size: pageIndicatorSize)
             pageIndicator = UIImage.dotImage(color: pageIndicatorTintColor ?? .gray, size: CGSize(width: pageIndicatorSize, height: pageIndicatorSize))
             updateDots()
         }
@@ -58,7 +60,9 @@ class CustomPageControl: UIPageControl {
 
         addTarget(self, action: #selector(didChangeValue(sender:)), for: .valueChanged)
     }
+}
 
+extension CustomPageControl {
     private func updateDots() {
         var i = 0
         let activeSize = currentPageIndicator.size
@@ -114,6 +118,10 @@ class CustomPageControl: UIPageControl {
             }
         }
         return dot
+    }
+
+    private func calcIndicatorOffset(size: CGFloat) -> CGFloat {
+        return abs(size - CustomPageControl.defaultDotSize) / 2
     }
 
     @objc private func didChangeValue(sender: UIPageControl){
