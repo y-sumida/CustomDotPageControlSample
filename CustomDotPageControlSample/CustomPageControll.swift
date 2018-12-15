@@ -2,11 +2,11 @@ import UIKit
 
 // https://stackoverflow.com/questions/50985359/subclassing-the-uipagecontrol-for-customizing-the-active-and-inactive-dot-image
 class CustomPageControl: UIPageControl {
-    private var imgActive: UIImage = UIImage.dotImage(color: UIColor.green, size: CGSize(width: 14, height: 14))
-    private var imgInactive: UIImage = UIImage.dotImage(color: UIColor.gray, size: CGSize(width: 10, height: 10))
+    private var currentPageIndicator: UIImage = UIImage.dotImage(color: UIColor.green, size: CGSize(width: 14, height: 14))
+    private var pageIndicator: UIImage = UIImage.dotImage(color: UIColor.gray, size: CGSize(width: 10, height: 10))
 
-    private let activeOffset: CGFloat = 3.5
-    private let inactiveOffset: CGFloat = 1.5
+    private let currentPageIndicatorOffset: CGFloat = 3.5
+    private let pageIndicatorOffset: CGFloat = 1.5
 
     override var numberOfPages: Int {
         didSet {
@@ -23,7 +23,7 @@ class CustomPageControl: UIPageControl {
     override var currentPageIndicatorTintColor: UIColor? {
         didSet {
             if let color = currentPageIndicatorTintColor {
-                imgActive = UIImage.dotImage(color: color, size: CGSize(width: 14, height: 14))
+                currentPageIndicator = UIImage.dotImage(color: color, size: CGSize(width: 14, height: 14))
             }
         }
     }
@@ -31,7 +31,7 @@ class CustomPageControl: UIPageControl {
     override var pageIndicatorTintColor: UIColor? {
         didSet {
             if let color = pageIndicatorTintColor {
-                imgInactive = UIImage.dotImage(color: color, size: CGSize(width: 10, height: 10))
+                pageIndicator = UIImage.dotImage(color: color, size: CGSize(width: 10, height: 10))
             }
         }
     }
@@ -46,39 +46,39 @@ class CustomPageControl: UIPageControl {
 
     private func updateDots() {
         var i = 0
-        let activeSize = imgActive.size
-        let inactiveSize = imgInactive.size
+        let activeSize = currentPageIndicator.size
+        let inactiveSize = pageIndicator.size
         let activeRect = CGRect(x: 0, y: 0, width: activeSize.width, height: activeSize.height)
         let inactiveRect = CGRect(x: 0, y: 0, width: inactiveSize.width, height: inactiveSize.height)
 
         for view in subviews {
             if let imageView = imageForSubview(view) {
                 if i == currentPage {
-                    imageView.image = imgActive
+                    imageView.image = currentPageIndicator
                     imageView.frame = activeRect
-                    imageView.frame.origin.y = imageView.frame.origin.y - activeOffset
-                    imageView.frame.origin.x = imageView.frame.origin.x - activeOffset
+                    imageView.frame.origin.y = imageView.frame.origin.y - currentPageIndicatorOffset
+                    imageView.frame.origin.x = imageView.frame.origin.x - currentPageIndicatorOffset
                 } else {
-                    imageView.image = imgInactive
+                    imageView.image = pageIndicator
                     imageView.frame = inactiveRect
-                    imageView.frame.origin.y = imageView.frame.origin.y - inactiveOffset
-                    imageView.frame.origin.x = imageView.frame.origin.x - inactiveOffset
+                    imageView.frame.origin.y = imageView.frame.origin.y - pageIndicatorOffset
+                    imageView.frame.origin.x = imageView.frame.origin.x - pageIndicatorOffset
                 }
                 i += 1
             } else {
-                var dotImage = imgInactive
+                var dotImage = pageIndicator
                 if i == currentPage {
-                    dotImage = imgActive
+                    dotImage = currentPageIndicator
                 }
                 view.clipsToBounds = false
                 let addedImageView: UIImageView = UIImageView(image: dotImage)
-                if dotImage == imgActive {
+                if dotImage == currentPageIndicator {
                     addedImageView.frame = activeRect
-                    addedImageView.frame.origin.y = addedImageView.frame.origin.y - activeOffset
-                    addedImageView.frame.origin.x = addedImageView.frame.origin.x - activeOffset
+                    addedImageView.frame.origin.y = addedImageView.frame.origin.y - currentPageIndicatorOffset
+                    addedImageView.frame.origin.x = addedImageView.frame.origin.x - currentPageIndicatorOffset
                 } else {
-                    addedImageView.frame.origin.y = addedImageView.frame.origin.y - inactiveOffset
-                    addedImageView.frame.origin.x = addedImageView.frame.origin.x - inactiveOffset
+                    addedImageView.frame.origin.y = addedImageView.frame.origin.y - pageIndicatorOffset
+                    addedImageView.frame.origin.x = addedImageView.frame.origin.x - pageIndicatorOffset
                 }
                 view.addSubview(addedImageView)
                 i += 1
