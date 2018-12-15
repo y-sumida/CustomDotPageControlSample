@@ -4,8 +4,8 @@ import UIKit
 class CustomPageControl: UIPageControl {
     private static let defaultDotSize: CGFloat = 7.0 // UIPageControllerのドットのサイズ
 
-    private lazy var currentPageIndicator: UIImage = UIImage.dotImage(color: UIColor.green, size: CGSize(width: currentPageIndicatorSize, height: currentPageIndicatorSize))
-    private lazy var pageIndicator: UIImage = UIImage.dotImage(color: UIColor.gray, size: CGSize(width: pageIndicatorSize, height: pageIndicatorSize))
+    private lazy var currentPageIndicator: UIImage = UIImage.dotImage(color: .gray, size: CGSize(width: currentPageIndicatorSize, height: currentPageIndicatorSize))
+    private lazy var pageIndicator: UIImage = UIImage.dotImage(color: .gray, size: CGSize(width: pageIndicatorSize, height: pageIndicatorSize))
 
     private lazy var currentPageIndicatorOffset: CGFloat = calcIndicatorOffset(size: CustomPageControl.defaultDotSize)
     private lazy var pageIndicatorOffset: CGFloat = calcIndicatorOffset(size: CustomPageControl.defaultDotSize)
