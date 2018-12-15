@@ -65,21 +65,19 @@ class CustomPageControl: UIPageControl {
 extension CustomPageControl {
     private func updateDots() {
         var i = 0
-        let activeSize = currentPageIndicator.size
-        let inactiveSize = pageIndicator.size
-        let activeRect = CGRect(x: 0, y: 0, width: activeSize.width, height: activeSize.height)
-        let inactiveRect = CGRect(x: 0, y: 0, width: inactiveSize.width, height: inactiveSize.height)
+        let currentPageIndicatorRect = CGRect(x: 0, y: 0, width: currentPageIndicatorSize, height: currentPageIndicatorSize)
+        let pageIndicatorRect = CGRect(x: 0, y: 0, width: pageIndicatorSize, height: pageIndicatorSize)
 
         for view in subviews {
             if let imageView = imageForSubview(view) {
                 if i == currentPage {
                     imageView.image = currentPageIndicator
-                    imageView.frame = activeRect
+                    imageView.frame = currentPageIndicatorRect
                     imageView.frame.origin.y = imageView.frame.origin.y - currentPageIndicatorOffset
                     imageView.frame.origin.x = imageView.frame.origin.x - currentPageIndicatorOffset
                 } else {
                     imageView.image = pageIndicator
-                    imageView.frame = inactiveRect
+                    imageView.frame = pageIndicatorRect
                     imageView.frame.origin.y = imageView.frame.origin.y - pageIndicatorOffset
                     imageView.frame.origin.x = imageView.frame.origin.x - pageIndicatorOffset
                 }
@@ -92,7 +90,7 @@ extension CustomPageControl {
                 view.clipsToBounds = false
                 let addedImageView: UIImageView = UIImageView(image: dotImage)
                 if dotImage == currentPageIndicator {
-                    addedImageView.frame = activeRect
+                    addedImageView.frame = currentPageIndicatorRect
                     addedImageView.frame.origin.y = addedImageView.frame.origin.y - currentPageIndicatorOffset
                     addedImageView.frame.origin.x = addedImageView.frame.origin.x - currentPageIndicatorOffset
                 } else {
