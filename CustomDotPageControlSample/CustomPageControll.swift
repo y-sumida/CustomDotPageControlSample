@@ -2,11 +2,26 @@ import UIKit
 
 // https://stackoverflow.com/questions/50985359/subclassing-the-uipagecontrol-for-customizing-the-active-and-inactive-dot-image
 class CustomPageControl: UIPageControl {
-    private var currentPageIndicator: UIImage = UIImage.dotImage(color: UIColor.green, size: CGSize(width: 14, height: 14))
-    private var pageIndicator: UIImage = UIImage.dotImage(color: UIColor.gray, size: CGSize(width: 10, height: 10))
+    private lazy var currentPageIndicator: UIImage = UIImage.dotImage(color: UIColor.green, size: CGSize(width: currentPageIndicatorSize, height: currentPageIndicatorSize))
+    private lazy var pageIndicator: UIImage = UIImage.dotImage(color: UIColor.gray, size: CGSize(width: pageIndicatorSize, height: pageIndicatorSize))
 
-    private let currentPageIndicatorOffset: CGFloat = 3.5
-    private let pageIndicatorOffset: CGFloat = 1.5
+    private var currentPageIndicatorOffset: CGFloat = 1.5
+    private var pageIndicatorOffset: CGFloat = 0
+
+    var currentPageIndicatorSize: CGFloat = 10 {
+        didSet {
+            currentPageIndicatorOffset = abs(currentPageIndicatorSize - 7) / 2
+            currentPageIndicator = UIImage.dotImage(color: currentPageIndicatorTintColor ?? .gray, size: CGSize(width: currentPageIndicatorSize, height: currentPageIndicatorSize))
+            updateDots()
+        }
+    }
+    var pageIndicatorSize: CGFloat = 7 {
+        didSet {
+            pageIndicatorOffset = abs(pageIndicatorSize - 7) / 2
+            pageIndicator = UIImage.dotImage(color: pageIndicatorTintColor ?? .gray, size: CGSize(width: pageIndicatorSize, height: pageIndicatorSize))
+            updateDots()
+        }
+    }
 
     override var numberOfPages: Int {
         didSet {
@@ -23,7 +38,7 @@ class CustomPageControl: UIPageControl {
     override var currentPageIndicatorTintColor: UIColor? {
         didSet {
             if let color = currentPageIndicatorTintColor {
-                currentPageIndicator = UIImage.dotImage(color: color, size: CGSize(width: 14, height: 14))
+                currentPageIndicator = UIImage.dotImage(color: color, size: CGSize(width: currentPageIndicatorSize, height: currentPageIndicatorSize))
             }
         }
     }
@@ -31,7 +46,7 @@ class CustomPageControl: UIPageControl {
     override var pageIndicatorTintColor: UIColor? {
         didSet {
             if let color = pageIndicatorTintColor {
-                pageIndicator = UIImage.dotImage(color: color, size: CGSize(width: 10, height: 10))
+                pageIndicator = UIImage.dotImage(color: color, size: CGSize(width: pageIndicatorSize, height: pageIndicatorSize))
             }
         }
     }
